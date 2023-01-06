@@ -1,0 +1,19 @@
+GCP:	
+    - name: "{{.Env.env}}_GCP" 
+    - env-url: "{{.Env.Cluster}}{{.Env.GCPTenant}}"
+    - env-token-name: "GCPToken"
+
+AWS:	
+    - name: "{{.Env.env}}_AWS" 
+    - env-url: "{{.Env.Cluster}}{{.Env.AWSTenant}}"
+    - env-token-name: "AWSToken"
+
+INTRA:	
+    - name: "{{.Env.env}}_INTRA" 
+    - env-url: "{{.Env.Cluster}}{{.Env.INTRATenant}}"
+    - env-token-name: "INTRAToken"
+
+AZR:	
+    - name: "{{.Env.env}}_AZR" 
+    - env-url: "{{.Env.Cluster}}{{.Env.AZRTenant}}"
+    - env-token-name: "AZRToken"
