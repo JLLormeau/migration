@@ -136,6 +136,15 @@ Mapping SLO (configuration id)
     ./mapping_entity.sh
     ./script_monaco.sh SLO   
 
+Mapping Key Request
+    
+    . env.sh
+    export api_saas=Rep Quentin
+    python3 script de quentin => rep KeyRequest
+    cp -r api_saas backup/SLO/KeyRequest
+    ./mapping_entity.sh
+    python3  deploy quentin
+
 ############### Update script ###############
 
 Re-download script
