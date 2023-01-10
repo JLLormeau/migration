@@ -93,7 +93,7 @@ Validate Config
 Mapping Entity (à refaire une fois les entités migrées sur le Saas - peut-être plusieurs fois - permet de faire le mapping entre Saas et Managed)
  
     . env.sh
-    python3 Mappingt_Entity.py
+    python3 Mapping_Entity.py
 
 Mapping Dashboard (multiples itérations)
     
