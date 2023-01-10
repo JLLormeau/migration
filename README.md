@@ -77,6 +77,7 @@ Mapping Dashboard (multiples itérations)
     ./monaco download -e=saas_env.yaml -p=dashboard-v2 $api_saas
     cp -r $api_saas backup/$api_saas
     ./mapping_owner.sh
+    ./mapping_url.sh
     ./mapping_config.sh
     ./monaco deploy -e=saas_env.yaml -c $api_saas/Saas
 
