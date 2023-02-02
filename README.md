@@ -159,9 +159,8 @@ Mapping Key Request
     
     . env.sh
     export tenant=AWS|GCP|AZR|INTRA|ALL
-    export local_file=backup_keyRequest-[ENV]-[TENANT].json
+    export local_rep=backup_keyRequest-[ENV]-[TENANT].json
     python3 Backup_KeyRequest_config.py 
-    cp -r local_rep backup/KeyRequest
     ./mapping_entity.sh
     python3  Post_Settings_Object_PayloadFile.py backup_keyRequest-[ENV]-[TENANT].json
 
