@@ -63,6 +63,8 @@ Monaco STEP 1
     ./clean-id-application-mobile.sh
     ./clean-id-application-web.sh
     ./clean-order-service-opaque.sh
+    ./step_deploy.sh ALL
+
     ./dashboard-constraint-violated.sh log/$env/deploy_$env_ALL_<date>.log => action manuelle 
 
 Monaco STEP 2
