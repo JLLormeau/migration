@@ -76,7 +76,7 @@ Monaco STEP 2
 Mapping Owner (fichier owner_mapping.csv)
  
     . env.sh
-    python3 Mappingt_Owner.py (ou récupérér fichier owner_mapping.csv)
+    python3 Mapping_Owner.py (ou récupérér fichier owner_mapping.csv)
  
 Mapping Entity (à faire avant la migration des entités sur le Saas - génère les fihciers CSV d'entité managed)
  
