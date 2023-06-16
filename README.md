@@ -121,6 +121,15 @@ Mapping Dashboard (multiples itérations)
     ./mapping_entity.sh
     ./monaco deploy -e=saas_env.yaml -c $local_rep/Saas
 
+Mapping Synthetic
+    
+    . env.sh   
+    export tenant=AWS|GCP|AZR|INTRA|ALL
+    export local_rep=./$env/SYNTHETIC-MONITOR
+    cp -r local_rep backup/SYNTHETIC-MONITOR
+    ./mapping_synthetic.sh
+    ./script_monaco.sh SYNTHETIC-MONITOR
+
 Mapping CALCULATED-METRICS-LOG (entityid)
     
     . env.sh
