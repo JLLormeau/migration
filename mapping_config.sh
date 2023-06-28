@@ -9,7 +9,7 @@ do
   for mapp  in `cat $env"_MAPP"/$api"_mapping".csv`
   do
     id_managed=`echo  $mapp | cut -d ";" -f 1` 
-    allfiles=`grep -rl -- $id_managed ./$local_rep | grep json$`
+    allfiles=`grep -rl -- $id_managed ./$api_saas | grep json$`
     if [ ${#allfiles} -ne  0 ]
       then
        id_saas=`echo  $mapp | cut -d ";" -f 2`

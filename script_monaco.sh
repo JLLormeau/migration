@@ -17,7 +17,7 @@ do
     test=` cat $env/$apiUpper/$env"_"$tenant2/$api/$api.yaml| grep "^-" | grep -ve "- name" | wc -l`
     if [ "$test" -eq  0 ]
       then
-        mv $env/$apiUpper/$env"_"$tenant2/$api/$api.yaml $env/$apiUpper/$env"_"$tenant/$api/$api.yaml.skipped
+        mv $env/$apiUpper/$env"_"$tenant2/$api/$api.yaml $env/$apiUpper/$env"_"$tenant2/$api/$api.yaml.skipped
       fi
   fi
 
@@ -58,7 +58,7 @@ then
 else
 
  Responsibles=`cat $log | grep responsible | grep -oE '[^ ]+$' | sort | uniq`
- for tenant2 in GCP AWS AZR INTRA 
+ for tenant2 in GCP AWS AZR INTRA
  do
   if [ $error -eq 0 ] 
   then 

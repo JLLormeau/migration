@@ -24,6 +24,7 @@ INTRAToken=os.getenv('INTRAToken')
 AZRTenant=Cluster+str(os.getenv('AZRTenant'))
 AZRToken=os.getenv('AZRToken')
 
+
 Managed_TENANT={GCPTenant: GCPToken, AWSTenant: AWSToken, AZRTenant: AZRToken, INTRATenant: INTRAToken}
 Env_Source=os.getenv('tenant')
 if Env_Source == None:
@@ -45,7 +46,7 @@ MappingID={'MZ':'id', 'APP_WEB':'id', 'APP_MOBILE':'id', 'RequestAttribute': 'id
 
 
 # variable changed if script is run on Windows or Linux. "\\" for Windows, "/" for Linux
-DIRECTORY = "./"+ENV+"_"MAPP/"
+DIRECTORY = "./"+ENV+"_MAPP/"
 if os.name == 'nt':
     DIRECTORY = ".\\"+ENV+"_MAPP\\"
 

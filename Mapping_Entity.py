@@ -24,7 +24,11 @@ INTRAToken=os.getenv('INTRAToken')
 AZRTenant=Cluster+str(os.getenv('AZRTenant'))
 AZRToken=os.getenv('AZRToken')
 
+
 Managed_TENANT={GCPTenant: GCPToken, AWSTenant: AWSToken, AZRTenant: AZRToken, INTRATenant: INTRAToken}
+Name_TENANT={GCPTenant : ENV+'_GCP', AWSTenant: ENV+'_AWS', AZRTenant : ENV+'_AZR', INTRATenant: ENV+'_INTRA'}
+
+
 Env_Source=os.getenv('tenant')
 if Env_Source == None:
     Env_Source='ALL'
@@ -51,9 +55,9 @@ LISTENTITY=[]
 #LISTENTITY=['CLOUD_APPLICATION_INSTANCE']
 
 # variable changed if script is run on Windows or Linux. "\\" for Windows, "/" for Linux
-DIRECTORY = "./"+ENV+"_"+Env_Source+"_MAPP/"
+DIRECTORY = "./"+ENV+"_MAPP/"
 if os.name == 'nt':
-    DIRECTORY = ".\\"+ENV+"_"+Env_Source+"_MAPP\\"
+    DIRECTORY = ".\\"+ENV+"__MAPP\\"
 
 #disable warning
 urllib3.disable_warnings()

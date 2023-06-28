@@ -24,12 +24,10 @@ INTRATenant=Cluster+str(os.getenv('INTRATenant'))
 INTRAToken=os.getenv('INTRAToken')
 AZRTenant=Cluster+str(os.getenv('AZRTenant'))
 AZRToken=os.getenv('AZRToken')
-SAASV1DEVTenant="https://"+str(os.getenv('SAASV1DEVTenant'))
-SAASV1DEVToken=os.getenv('SAASV1DEVToken')
 
-Managed_TENANT={GCPTenant: GCPToken, AWSTenant: AWSToken, AZRTenant: AZRToken, INTRATenant: INTRAToken, SAASV1DEVTenant: SAASV1DEVToken}
-Name_TENANT={GCPTenant : ENV+'_GCP', AWSTenant: ENV+'_AWS', AZRTenant : ENV+'_AZR', INTRATenant: ENV+'_INTRA', SAASV1DEVTenant: ENV+'_SAASV1DEV'}
 
+Managed_TENANT={GCPTenant: GCPToken, AWSTenant: AWSToken, AZRTenant: AZRToken, INTRATenant: INTRAToken}
+Name_TENANT={GCPTenant : ENV+'_GCP', AWSTenant: ENV+'_AWS', AZRTenant : ENV+'_AZR', INTRATenant: ENV+'_INTRA'}
 
 ##################################
 ### Environment saas
@@ -89,7 +87,7 @@ MappingID={ 'SYNTHETIC-MONITOR': 'entityId', \
 MappingName={'EXTENSION-V2': 'extensionName' }
 
 #Default 
-Parameter={ 'SLO' : '?pageSize=10000&sort=name&timeFrame=CURRENT&demo=false&evaluate=false&enabledSlos=true&showGlobalSlos=true&Api-Token=','EXTENSION-V2' : '?pageSize=100&Api-Token='}
+Parameter={ 'SLO' : '?pageSize=10000&sort=name&timeFrame=CURRENT&demo=false&evaluate=false&enabledSlos=true&showGlobalSlos=true&Api-Token='}
 
     
 
@@ -160,13 +158,7 @@ def info_api_managed(TENANT,TOKEN,API):
     datastore = queryDynatraceAPI(uri)
     #print(datastore)
     if datastore != []:
-     '''
-     if 'totalCount' in datastore:
-        print(datastore['totalCount'])
-     if 'pageSize' in datastore:
-        print(datastore['pageSize'])
-     '''
-     if DataStore[API] != '':
+        if DataStore[API] != '': 
             apilist = datastore[DataStore[API]]
             for entity in apilist:
                 #print(entity)
@@ -175,7 +167,7 @@ def info_api_managed(TENANT,TOKEN,API):
                     RESULT_MANAGED.append(entity[MappingName[API]])
                     j+=1
                 i+=1
-     else:
+        else:
             apilist = datastore
             for entity in apilist:
                 #print(entity)
@@ -190,61 +182,11 @@ def info_api_managed(TENANT,TOKEN,API):
         
     return ()
 
-
-##################################
-## diff
-##################################
-def info_api_diff(TENANT,TOKEN,API,id):
-
-    #defaut DataStore = 'values'
-    if API not in DataStore :
-        DataStore[API] = 'values'
-
-    #defaut MappingID = 'id'
-    if API not in MappingID :
-        MappingID[API] = 'id'
-
-    #defaut MappingName = 'name'
-    if API not in MappingName :
-        MappingName[API] = 'name'
-        
-    #defaut Parameter = '?Api-Token='
-    if API not in Parameter :
-        Parameter[API] = '?Api-Token='
-
-
-    uri=TENANT+Mapping[API]+Parameter[API]+TOKEN
-  
-    #print(uri)
-    #print(DataStore[API])
-    i=1
-    j=1
-    datastore = queryDynatraceAPI(uri)
-    #print(datastore)
-    if datastore != []:
-        if DataStore[API] != '': 
-            apilist = datastore[DataStore[API]]
-            for entity in apilist:
-                #print(entity)
-                if entity[MappingName[API]] == id:
-                    print(Name_TENANT[TENANT],id)
-
-
-        else:
-            apilist = datastore
-            for entity in apilist:
-                #print(entity)
-                if entity[MappingName[API]] == id:
-                    #print(entity[MappingName[API]])
-                    print(Name_TENANT[TENANT],id)
-        
-    return ()
-
 ##################################
 ## list of API
 ##################################
 def info_local_rep(TENANT,TOKEN,API):
-    uri=TENANT+Mapping[API]+Parameter[API]+TOKEN
+    uri=TENANT+Mapping[API]+'?Api-Token='+TOKEN
     
     #print(uri)
     #print(DataStore[API])
@@ -298,9 +240,7 @@ for api  in Listapi:
     #mapping
     for i in RESULT_MANAGED:
         if i not in RESULT_SAAS :
-            #print(i)
-            for tenant in Managed_TENANT:
-                info_api_diff(tenant, Managed_TENANT[tenant], api,i)
+            print(i)
 
     #print(RESULT_SAAS)
 

@@ -16,13 +16,18 @@ do
   echo $doublon
   cd $env/$apiUpper
   echo  "diff -sarq $env"_GCP" $env"_INTRA" | grep Files | grep .json | grep $doublon "
+  #diff -sarq $env"_GCP" $env"_SAASV1DEV" | grep Files | grep .json | grep $doublon  > doublon_p0.tmp
+  #diff -sarq $env"_AWS" $env"_SAASV1DEV" | grep Files | grep .json | grep $doublon  >> doublon_p0.tmp
+  #diff -sarq $env"_INTRA" $env"_SAASV1DEV" | grep Files | grep .json | grep $doublon  >> doublon_p0.tmp
+  #diff -sarq $env"_AZR" $env"_SAASV1DEV" | grep Files | grep .json | grep $doublon  >> doublon_p0.tmp
   diff -sarq $env"_GCP" $env"_AZR" | grep Files | grep .json | grep $doublon  > doublon_p1.tmp
   diff -sarq $env"_AWS" $env"_AZR" | grep Files | grep .json | grep $doublon  >> doublon_p1.tmp
   diff -sarq $env"_INTRA" $env"_AZR" | grep Files | grep .json | grep $doublon  >> doublon_p1.tmp
   diff -sarq $env"_GCP" $env"_INTRA" | grep Files | grep .json | grep $doublon  > doublon_p2.tmp
   diff -sarq $env"_AWS" $env"_INTRA" | grep Files | grep .json | grep $doublon  >> doublon_p2.tmp
   diff -sarq $env"_GCP" $env"_AWS" | grep Files | grep .json | grep $doublon  > doublon_p3.tmp
-  cat doublon_p1.tmp > $doublon"_"$api.log
+  #cat doublon_p0.tmp > $doublon"_"$api.log
+  cat doublon_p1.tmp >> $doublon"_"$api.log
   cat doublon_p2.tmp >> $doublon"_"$api.log
   cat doublon_p3.tmp >> $doublon"_"$api.log
   cd ../..
@@ -30,10 +35,23 @@ do
   cat $env/$apiUpper/doublon_p3.tmp | cut -d / -f 3 | cut -d . -f 1 | sort | uniq > $env/$apiUpper/doublon_p3_uniq.tmp
   cat $env/$apiUpper/doublon_p2.tmp | cut -d / -f 3 | cut -d . -f 1 | sort | uniq > $env/$apiUpper/doublon_p2_uniq.tmp
   cat $env/$apiUpper/doublon_p1.tmp | cut -d / -f 3 | cut -d . -f 1 | sort | uniq > $env/$apiUpper/doublon_p1_uniq.tmp
+  #cat $env/$apiUpper/doublon_p0.tmp | cut -d / -f 3 | cut -d . -f 1 | sort | uniq > $env/$apiUpper/doublon_p0_uniq.tmp
+
+  #if [ -e $env/$apiUpper/$env"_SAASV1DEV"/$api/$api.yaml ]
+  #then
+  #  for i in `cat $env/$apiUpper/doublon_p0_uniq.tmp`
+  #    do
+  #    if [[ -n $i ]]
+  #    then
+  #     sed -i "s/^\- $i/##\-$doublon"_saasv1dev" $i/g" $env/$apiUpper/$env"_SAASV1DEV"/$api/$api.yaml
+  #   fi
+  #  done
+  #fi
+  #echo $env"_SAASV1DEV with GCP AWS INTRA AZR"="`cat $env/$apiUpper/$doublon"_"$api.log|grep "and "$env"_AZR"| wc -l`"
 
   if [ -e $env/$apiUpper/$env"_AZR"/$api/$api.yaml ]
   then
-    for i in `cat $env/$apiUpper/doublon_p3_uniq.tmp`
+    for i in `cat $env/$apiUpper/doublon_p1_uniq.tmp`
       do
       if [[ -n $i ]]
       then
@@ -58,7 +76,7 @@ do
 
   if [ -e $env/$apiUpper/$env"_AWS"/$api/$api.yaml ]
   then
-    for i in `cat $env/$apiUpper/doublon_p1_uniq.tmp`
+    for i in `cat $env/$apiUpper/doublon_p3_uniq.tmp`
       do
       if [[ -n $i ]]
       then
@@ -67,12 +85,13 @@ do
     done
  fi
   echo $env"_AWS with GCP"="`cat $env/$apiUpper/$doublon"_"$api.log|grep "and "$env"_AWS"|wc -l`"
+
   echo
 done
 
 rm -f $env/$apiUpper/doublon*.tmp
 
-for TENANT in AZR AWS INTRA
+for TENANT in SAASV1DEV AZR AWS INTRA
 do
    Tenant=${TENANT,,}
    #echo $TENANT, $tenant
