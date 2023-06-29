@@ -54,6 +54,7 @@ Monaco STEP 1
     export tenant=AWS|GCP|AZR|INTRA|ALL
     ./reorganize.sh
     ./step_deploy.sh ALL
+    export local_rep=./$env
     python3 Mapping_Config.py
     export local_rep=$env
     ./mapping_config.sh
