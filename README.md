@@ -20,6 +20,10 @@ Variables env.sh
     export INTRAToken=
     export AZRTenant=
     export AZRToken=
+
+bf_mapping.csv
+
+    bf_source;bf_cible;
     
 Select a specific env pour le mapping (optionnal)
 
@@ -57,6 +61,7 @@ Monaco STEP 1
     export local_rep=$env
     python3 Mapping_Config.py
     ./mapping_config.sh
+    ./mapping_bf.sh
     ./adjust-config-azure-credential.sh
     ./adjust-config-gcp-credential.sh
     ./clean-config-aws-credential.sh
