@@ -187,6 +187,7 @@ Mapping beacon
     export local_rep=BEACON
     ./monaco download -e=saas_env.yaml -p=application-web,application-mobile $local_rep
     ./mapping_bf.sh
+    ./clean-id-mobile-for-beacon.sh
     ./monaco deploy -e=saas_env.yaml -c $local_rep/Saas
 
 ############### Update script ###############
