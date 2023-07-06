@@ -22,7 +22,7 @@ do
           do
            echo "Mapping "$url" "$newurl"  "$filetomap 
            echo "sed -i 's#$url#$newurl#g' $filetomap"
-           sed -i "s/$url/$newurl/g" $filetomap
+           sed -i "s#$url#$newurl#g" $filetomap
            done
         fi
 done
