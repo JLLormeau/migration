@@ -172,7 +172,7 @@ Mapping SLO (configuration id)
     ./mapping_entity.sh
     ./script_monaco.sh SLO   
 
-Mapping Key Request
+Mapping Key Request (a faire)
     
     . env.sh
     export tenant=AWS|GCP|AZR|INTRA|ALL
@@ -180,6 +180,14 @@ Mapping Key Request
     python3 Backup_KeyRequest_config.py 
     ./mapping_entity.sh
     python3  Post_Settings_Object_PayloadFile.py backup_keyRequest-[ENV]-[TENANT].json
+
+Mapping beacon
+
+    . env.sh   
+    export local_rep=BEACON
+    ./monaco download -e=saas_env.yaml -p=application-web,application-mobile $local_rep
+    ./mapping_bf.sh
+    ./monaco deploy -e=saas_env.yaml -c $local_rep/Saas
 
 ############### Update script ###############
 
