@@ -6,13 +6,13 @@ echo script_name ${0##*/}
 apiUpper=$1
 api="${apiUpper,,}"
 
-list=`grep -rl -- ^"   \"applicationId\":"  ./$local_rep/Saas/application-mobile | grep "json"$`
+list=`grep -rl -- ^" \"applicationId\":"  ./$local_rep/Saas/application-mobile | grep "json"$`
     
 if [ ${#list} -ne  0 ]
 then
    for file in $list
    do
-   linetodelete=`cat  $file | grep -n ^"   \"applicationId\":" | cut -d ":" -f 1`
+   linetodelete=`cat  $file | grep -n ^" \"applicationId\":" | cut -d ":" -f 1`
    if [ ${#linetodelete} -ne  0 ]
    then
     echo $file
