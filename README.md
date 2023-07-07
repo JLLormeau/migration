@@ -154,7 +154,7 @@ Mapping SYNTHETIC-MONITOR (configuration id)
     ./mapping_config.sh
     ./script_monaco.sh SYNTHETIC-MONITOR
 
-Mapping SYNTHETIC-MONITOR (for DEV only)
+Mapping SYNTHETIC-MONITOR
     
     . env.sh   
     export tenant=AWS|GCP|AZR|INTRA|ALL
