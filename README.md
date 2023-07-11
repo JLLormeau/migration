@@ -55,7 +55,6 @@ FIX DEV
 Monaco STEP 1
 
     . env.sh
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     ./reorganize.sh
     ./step_deploy.sh ALL
     export local_rep=$env
@@ -75,7 +74,6 @@ Monaco STEP 1
 Monaco STEP 2
     
     . env.sh
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     ./step_deploy.sh STEP2
     
 Mapping Owner (fichier owner_mapping.csv)
@@ -86,13 +84,11 @@ Mapping Owner (fichier owner_mapping.csv)
 Mapping Entity (à faire avant la migration des entités sur le Saas - génère les fihciers CSV d'entité managed)
  
     . env.sh
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     python3 Mapping_Entity.py
  
 Mapping Dashboard (multiples itérations)
     
     . env.sh   
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     export local_rep=DASHBOARD-V2
     ./monaco download -e=saas_env.yaml -p=dashboard-v2 $local_rep
     cp -r $local_rep backup/$local_rep
@@ -113,13 +109,11 @@ Validate Config
 Mapping Entity (à refaire une fois les entités migrées sur le Saas - peut-être plusieurs fois - permet de faire le mapping entre Saas et Managed)
  
     . env.sh
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     python3 Mapping_Entity.py
 
 Mapping Dashboard (multiples itérations)
     
     . env.sh   
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     export local_rep=DASHBOARD-V2
     ./monaco download -e=saas_env.yaml -p=dashboard-v2 $local_rep
     cp -r $local_rep backup/$local_rep
@@ -130,7 +124,6 @@ Mapping Dashboard (multiples itérations)
 Mapping CALCULATED-METRICS-LOG (entityid)
     
     . env.sh
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     export local_rep=./$env/CALCULATED-METRICS-LOG
     cp -r local_rep backup/CALCULATED-METRICS-LOG
     ./mapping_entity.sh
@@ -139,7 +132,6 @@ Mapping CALCULATED-METRICS-LOG (entityid)
  Mapping REQUEST-ATTRIBUTES (entityid)
     
     . env.sh
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     export local_rep=./$env/REQUEST-ATTRIBUTES
     cp -r local_rep backup/REQUEST-ATTRIBUTES
     ./mapping_entity.sh
@@ -148,7 +140,6 @@ Mapping CALCULATED-METRICS-LOG (entityid)
 Mapping SYNTHETIC-MONITOR (configuration id)
     
     . env.sh
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     export local_rep=./$env/SYNTHETIC-MONITOR
     cp -r local_rep backup/SYNTHETIC-MONITOR
     ./mapping_config.sh
@@ -157,7 +148,6 @@ Mapping SYNTHETIC-MONITOR (configuration id)
 Mapping SYNTHETIC-MONITOR
     
     . env.sh   
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     export local_rep=./$env/SYNTHETIC-MONITOR
     cp -r local_rep backup/SYNTHETIC-MONITOR
     ./mapping_synthetic.sh
@@ -166,7 +156,6 @@ Mapping SYNTHETIC-MONITOR
 Mapping SLO (configuration id)
     
     . env.sh
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     export local_rep=./$env/SLO
     cp -r local_rep backup/SLO
     ./mapping_entity.sh
@@ -175,7 +164,6 @@ Mapping SLO (configuration id)
 Mapping Key Request (a faire)
     
     . env.sh
-    export tenant=AWS|GCP|AZR|INTRA|ALL
     export local_rep=backup_keyRequest-[ENV]-[TENANT].json
     python3 Backup_KeyRequest_config.py 
     ./mapping_entity.sh
