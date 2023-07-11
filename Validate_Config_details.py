@@ -41,6 +41,7 @@ SaasToken=os.getenv('SaasToken')
 ##################################
 
 Mapping ={'ALERTING-PROFILE' : '/api/config/v1/alertingProfiles', \
+          'ANOMALY-DETECTION-METRICS-DISK' : '/api/config/v1/anomalyDetection/diskEvents', \
           'ANOMALY-DETECTION-METRICS' : '/api/config/v1/anomalyDetection/metricEvents', \
           'APP-DETECTION-RULE-V2' : '/api/config/v1/applicationDetectionRules', \
           'APPLICATION-MOBILE' : '/api/config/v1/applications/mobile', \

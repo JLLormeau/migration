@@ -52,27 +52,33 @@ if not os.path.exists(DIRECTORY):
 ##################################
 ## Variables
 ##################################
-LIST_UPDATE=['ALERTING-PROFILE', 'ANOMALY-DETECTION-METRICS','APP-DETECTION-RULE-V2', 'APPLICATION-MOBILE', 'APPLICATION-WEB', 'AUTO-TAG', 'AWS-CREDENTIALS', 'AZURE-CREDENTIALS', \
+LIST_UPDATE=['ALERTING-PROFILE', 'ANOMALY-DETECTION-METRICS-DISK', 'ANOMALY-DETECTION-METRICS','APP-DETECTION-RULE-V2', 'APPLICATION-MOBILE', 'CALCULATED-METRICS-APPLICATION-MOBILE', \
+             'APPLICATION-WEB', 'CALCULATED-METRICS-LOG', 'AUTO-TAG', 'AWS-CREDENTIALS', 'AZURE-CREDENTIALS', \
              'CALCULATED-METRICS-APPLICATION-WEB', 'CALCULATED-METRICS-SERVICE', 'CUSTOM-SERVICE-PHP', 'CUSTOM-SERVICE-NODEJS', 'CUSTOM-SERVICE-DOTNET', 'CUSTOM-SERVICE-GO',\
              'CUSTOM-SERVICE-JAVA', 'DASHBOARD-V2', 'MAINTENANCE-WINDOW', 'MANAGEMENT-ZONE', 'NOTIFICATION', 'REQUEST-ATTRIBUTES', \
-             'SLO', 'SYNTHETIC-MONITOR', 'EXTENSION-V2']
+             'SLO', 'SYNTHETIC-MONITOR']
              
 Mapping ={'ALERTING-PROFILE' : '/api/config/v1/alertingProfiles', \
+          'ANOMALY-DETECTION-METRICS-DISK' : '/api/config/v1/anomalyDetection/diskEvents', \
           'ANOMALY-DETECTION-METRICS' : '/api/config/v1/anomalyDetection/metricEvents', \
+          'APP-DETECTION-RULE-V2' : '/api/config/v1/applicationDetectionRules', \
           'APPLICATION-MOBILE' : '/api/config/v1/applications/mobile', \
           'APPLICATION-WEB' : '/api/config/v1/applications/web', \
-          'APP-DETECTION-RULE-V2' : '/api/config/v1/applicationDetectionRules', \
           'AUTO-TAG' : '/api/config/v1/autoTags' , \
           'AWS-CREDENTIALS' : '/api/config/v1/aws/credentials', \
           'AZURE-CREDENTIALS' : '/api/config/v1/azure/credentials', \
+          'CALCULATED-METRICS-APPLICATION-MOBILE' :  '/api/config/v1/calculatedMetrics/mobile' , \
           'CALCULATED-METRICS-APPLICATION-WEB' :  '/api/config/v1/calculatedMetrics/rum' , \
+          'CALCULATED-METRICS-LOG' : '/api/config/v1/calculatedMetrics/log' , \
           'CALCULATED-METRICS-SERVICE' : '/api/config/v1/calculatedMetrics/service' , \
-          'CUSTOM-SERVICE-PHP' : '/api/config/v1/service/customServices/php', \
-          'CUSTOM-SERVICE-NODEJS' : '/api/config/v1/service/customServices/nodeJS', \
+          'CREDENTIAL-VAULT' : '/api/config/v1/credentials' , \
           'CUSTOM-SERVICE-JAVA' : '/api/config/v1/service/customServices/java', \
+          'CUSTOM-SERVICE-PHP' : '/api/config/v1/service/customServices/php', \
           'CUSTOM-SERVICE-DOTNET' : '/api/config/v1/service/customServices/dotNet', \
+          'CUSTOM-SERVICE-NODEJS' : '/api/config/v1/service/customServices/nodeJS', \
           'CUSTOM-SERVICE-GO' : '/api/config/v1/service/customServices/go', \
           'DASHBOARD-V2' : '/api/config/v1/dashboards' ,  \
+          'EXTENSION' : '/api/config/v1/extensions' ,  \
           'EXTENSION-V2' : '/api/v2/extensions', \
           'MAINTENANCE-WINDOW' : '/api/config/v1/maintenanceWindows', \
           'MANAGEMENT-ZONE':'/api/config/v1/managementZones', \
@@ -83,8 +89,7 @@ Mapping ={'ALERTING-PROFILE' : '/api/config/v1/alertingProfiles', \
           'SYNTHETIC-MONITOR': '/api/v1/synthetic/monitors'
           }       
 
-    #'EXTENSION' : '/api/config/v1/extensions' ,  \
-    #'CREDENTIAL-VAULT' : '/api/config/v1/credentials' , \
+    
 
 #defaut DataStore = 'values'		  
 DataStore={'SLO': 'slo', \
@@ -102,7 +107,7 @@ DataStore={'SLO': 'slo', \
 #defaut MappingID = 'id'
 MappingID={ 'SYNTHETIC-MONITOR': 'entityId', \
             'SYNTH_LOCATION' : 'entityId' ,\
-            'EXTENSION-V2': 'extensionextensionName' }
+            'EXTENSION-V2': 'extensionName' }
 
 #defaut MappingName = 'name'
 MappingName={'EXTENSION-V2': 'extensionName' }
@@ -191,7 +196,7 @@ def info_api_managed(TENANT,TOKEN,API):
 
     uri=TENANT+Mapping[API]+Parameter[API]+TOKEN
   
-    #print(uri)
+    print(uri)
     #print(DataStore[API])
     i=1
     j=1
@@ -313,7 +318,7 @@ def info_api_diff(TENANT,TOKEN,API,id):
 def download(API, URI, PARAM, TOKEN, id, name):
 
         uri = URI+ '/' + id +PARAM+TOKEN
-        #print(uri)
+        print(uri)
         config = queryDynatraceAPI(uri)
         if 'metadata' in config:
                 del config['metadata']    
