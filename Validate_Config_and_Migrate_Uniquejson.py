@@ -196,7 +196,7 @@ def info_api_managed(TENANT,TOKEN,API):
 
     uri=TENANT+Mapping[API]+Parameter[API]+TOKEN
   
-    print(uri)
+    #print(uri)
     #print(DataStore[API])
     i=1
     j=1
@@ -228,7 +228,7 @@ def info_api_managed(TENANT,TOKEN,API):
                     j+=1
                 i+=1
             
-    print(API, Name_TENANT[TENANT], i-1, j-1)
+    #print(API, Name_TENANT[TENANT], i-1, j-1)
         
         
     return ()
@@ -326,6 +326,8 @@ def download(API, URI, PARAM, TOKEN, id, name):
                 del config['id']
         if 'identifier' in config:
                 del config['identifier']
+        if API == 'NOTIFICATION':
+            config['active']=False
         with open(DIRECTORY+API+'_'+id+'.json', 'w') as outfile:
                json.dump(config, outfile)
         print(name, API+'_'+id+'.json downloaded on '+DIRECTORY)
