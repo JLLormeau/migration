@@ -206,9 +206,11 @@ Re-import the configuration to SaaS:
 ############### Backup and Import Services Settings ###############
 
     py Back_up_services.py --tenant=<intra, aws, gcp or azr>
+    *TODO faire le mapping des ServiceIDs avant de faire l'import*
     py Import_service_pg_settings_from_backup.py --option=service --tenant=<intra, aws, gcp or azr>
 
 ############### Backup and Import Process Groups Settings ###############
 
     py Back_up_process_groups.py --tenant=<intra, aws, gcp or azr>
+    *TODO faire le mapping des ProcessGroupIDs avant de faire l'import*
     py Import_service_pg_settings_from_backup.py --option=process --tenant=<intra, aws, gcp or azr>
