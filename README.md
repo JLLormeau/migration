@@ -190,17 +190,25 @@ Re-download script
 
 Backup Managed configurations:
 
-    py backup_webapps_config.py --tenant=<intra, aws, gcp or azr>
-    py backup_mobileapps_config.py --tenant=<intra, aws, gcp or azr>
+    py Backup_webapps_config.py --tenant=<intra, aws, gcp or azr>
+    py Backup_mobileapps_config.py --tenant=<intra, aws, gcp or azr>
 
 
 Re-import the configuration to SaaS:
 
-    py import_webapps_config.py --tenant=<intra, aws, gcp or azr>
-    py import_mobileapps_config.py --tenant=<intra, aws, gcp or azr>
+    py Import_webapps_config.py --tenant=<intra, aws, gcp or azr>
+    py Import_mobileapps_config.py --tenant=<intra, aws, gcp or azr>
 
 ############### Generate new SaaS JS code for Agentless applications ###############
 
-    py get_new_agentless_code.py --tenant=<intra, aws, gcp or azr>
+    py Get_new_agentless_code.py --tenant=<intra, aws, gcp or azr>
 
+############### Backup and Import Services Settings ###############
 
+    py Back_up_services.py --tenant=<intra, aws, gcp or azr>
+    py Import_service_pg_settings_from_backup.py --option=service --tenant=<intra, aws, gcp or azr>
+
+############### Backup and Import Process Groups Settings ###############
+
+    py Back_up_process_groups.py --tenant=<intra, aws, gcp or azr>
+    py Import_service_pg_settings_from_backup.py --option=process --tenant=<intra, aws, gcp or azr>
