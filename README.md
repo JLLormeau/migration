@@ -203,6 +203,10 @@ Re-import the configuration to SaaS:
 
     py Get_new_agentless_code.py --tenant=<intra, aws, gcp or azr>
 
+############### Generate new Mobile App ID ###############
+
+    py get_new_mobile_applicationId.py --tenant=<intra, aws, gcp or azr>
+
 ############### Backup and Import Services Settings ###############
 
     py Back_up_services.py --tenant=<intra, aws, gcp or azr>
