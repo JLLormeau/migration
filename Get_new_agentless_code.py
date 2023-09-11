@@ -26,8 +26,8 @@ SaasTenant="https://"+str(os.getenv('SaasTenant'))
 SaasToken=os.getenv('SaasToken')
 
 ### Mapping
-Api ={'APP_WEB' : '/api/config/v1/applications/web', 'APP_MOBILE' : '/api/config/v1/applications/mobile', 'KEY_USER_ACTION' : '/keyUserActions', 'ERROR_RULES' : '/errorRules', 'SETTINGS_OBJECT' : '/api/v2/settings/objects', 'SETTINGS_OBJECT' : '/api/v2/settings/objects', 'MANUAL_APP': '/api/v1/rum/manualApps', 'JS_TAG': '/api/v1/rum/jsTag', 'ASYNC_CODE_SNIPPET': '/api/v1/rum/asyncCS', 'INLINE_SCRIPT': '/api/v1/rum/jsInlineScript'}
-schemaIds={'DATA_PRIVACY_SETTINGS_MOBILE':'builtin:rum.mobile.privacy', 'ERROR_SETTINGS_MOBILE': 'builtin:rum.mobile.request-errors', 'CRASH_SETTINGS_MOBILE' : 'builtin:anomaly-detection.rum-mobile-crash-rate-increase', 'CRASH_SETTINGS_CUSTOM': 'builtin:anomaly-detection.rum-custom-crash-rate-increase', 'JS_UPDATES': 'builtin:rum.web.rum-javascript-updates'}
+Api ={'APP_WEB' : '/api/config/v1/applications/web', 'SETTINGS_OBJECT' : '/api/v2/settings/objects', 'SETTINGS_OBJECT' : '/api/v2/settings/objects', 'MANUAL_APP': '/api/v1/rum/manualApps', 'JS_TAG': '/api/v1/rum/jsTag', 'ASYNC_CODE_SNIPPET': '/api/v1/rum/asyncCS', 'INLINE_SCRIPT': '/api/v1/rum/jsInlineScript'}
+schemaIds={'JS_UPDATES': 'builtin:rum.web.rum-javascript-updates'}
 
 #================================================
 # Functions
