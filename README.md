@@ -218,5 +218,5 @@ Re-import the configuration to SaaS:
 ############### Backup and Import Hosts Settings ###############
 
     py Back_up_hosts.py --tenant=<intra, aws, gcp or azr>
-    *TODO faire le mapping des ProcessGroupIDs avant de faire l'import*
-    py Import_service_pg_settings_from_backup.py --option=host --tenant=<intra, aws, gcp or azr>
+    *TODO faire le mapping des HostIDs avant de faire l'import*
+    TODO py Import_service_pg_settings_from_backup.py --option=host --tenant=<intra, aws, gcp or azr>
