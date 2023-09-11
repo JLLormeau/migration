@@ -35,6 +35,7 @@ schemaIds={'DATA_PRIVACY_SETTINGS_MOBILE':'builtin:rum.mobile.privacy', 'ERROR_S
 def get(url, token, api):
     url = url + api
     error, message = http_get(url, token)
+    print(url)
     check_for_errors(error, message)
     return error, message
 
@@ -94,12 +95,14 @@ def main():
     else:
         print("Error - Wrong argument")
         sys.exit(1)
+    
 
     error, manual_apps_managed = get(ManagedTenant, ManagedToken, Api["MANUAL_APP"])
     if error:
         print("Error - Get  manual apps (Managed")
     else:
         manual_apps_managed_json = json.loads(manual_apps_managed)
+        print(manual_apps_managed_json)
 
     error, manual_apps_saas = get(SaasTenant, SaasToken, Api["MANUAL_APP"])
     if error:
@@ -108,18 +111,24 @@ def main():
             manual_apps_saas_json = json.loads(manual_apps_saas)
 
     not_migrated_apps = []
+    apps_in_saas=[]
     cpt_managed = 0
     cpt_saas = 0
+
     for app in manual_apps_managed_json: 
         not_migrated_apps.append(app["displayName"])
     print(not_migrated_apps)
+
+    for app in manual_apps_saas_json: 
+        apps_in_saas.append(app["displayName"])
+    #print(apps_in_saas)
 
     #Pour toutes les applications manuelles source (Managed)
     for app in manual_apps_managed_json: 
         appId = app["applicationId"]
         app_managed = app["displayName"]
         cpt_managed += 1
-        #print(app_managed)
+        print(app_managed)
 
         # Vérifier si l'application utilise la dernière version du JS
         error, js_updates_settings = get_settings_object(ManagedTenant, ManagedToken, Api["SETTINGS_OBJECT"], schemaIds["JS_UPDATES"])
@@ -130,17 +139,17 @@ def main():
         #TODO Sinon update SaaS config
 
         #Récupérer le type d'injection
-        if app_managed != "ps2":
+        if app_managed != "ps2" or app_managed.startswith("IRN-71112") is False:
             error, app_config = get_entity(ManagedTenant, ManagedToken, Api["APP_WEB"],appId)
             if error:
                 print("Error - Get injection type")
+
             else:
                 app_config_json = json.loads(app_config)
                 injection_mode = app_config_json["monitoringSettings"]["injectionMode"]
                 #print(injection_mode)
-
-        #OUTPUT
-        print(app_managed + " - JS version -> " + js_version + ", " + injection_mode)
+                #OUTPUT
+                print(app_managed + " - JS version -> " + js_version + ", " + injection_mode)
 
         #Pour toutes les manual_apps_saas_json manuelles cible (SaaS)
         for app in manual_apps_saas_json: 
@@ -159,10 +168,11 @@ def main():
                     app_name = app_name.replace("/", "~")
                     app_name = app_name.replace(":", "~")
                     filename = injection_mode + "-" + app_name + "_" + appId_saas + "_" + ENV.lower() + "-" + tenant + "--" + ENV.lower() + ".txt"
-                    with open(filename, "w") as f:
-                        f.write(js_script) #Write result into file
-                    print("New JS tag in: " + filename)
-                    not_migrated_apps.remove(app_saas)
+                    if app_managed.startswith("IRN-71112") is False:
+                        with open(filename, "w") as f:
+                            f.write(js_script) #Write result into file
+                        print("New JS tag in: " + filename)
+                        not_migrated_apps.remove(app_saas)
 
             #Récupérer les nouveaux code snippet
             if (injection_mode == "CODE_SNIPPET") & (app_managed == app_saas):  
@@ -176,10 +186,11 @@ def main():
                     app_name = app_name.replace("/", "~")
                     app_name = app_name.replace(":", "~")
                     filename = injection_mode + "-" + app_name + "_" + appId_saas + "_" + ENV.lower() + "-" + tenant + "--" + ENV.lower() + ".txt"
-                    with open(filename, "w") as f:
-                        f.write(code_snippet_script) #Write result into file
-                    print("New code snippet in: " + filename)
-                    not_migrated_apps.remove(app_saas)
+                    if app_managed.startswith("IRN-71112") is False:
+                        with open(filename, "w") as f:
+                            f.write(code_snippet_script) #Write result into file
+                        print("New code snippet in: " + filename)
+                        not_migrated_apps.remove(app_saas)
 
             #Récupérer les nouveaux inline code
             if (injection_mode == "INLINE_CODE") & (app_managed == app_saas):  
@@ -193,10 +204,11 @@ def main():
                     app_name = app_name.replace("/", "~")
                     app_name = app_name.replace(":", "~")
                     filename = injection_mode + "-" + app_name + "_" + appId_saas + "_" + ENV.lower() + "-" + tenant + "--" + ENV.lower() + ".txt"
-                    with open(filename, "w") as f:
-                        f.write(inline_code_script) #Write result into file
-                    print("New inline code in: " + filename)
-                    not_migrated_apps.remove(app_saas)
+                    if app_managed.startswith("IRN-71112") is False:
+                        with open(filename, "w") as f:
+                            f.write(inline_code_script) #Write result into file
+                        print("New inline code in: " + filename)
+                        not_migrated_apps.remove(app_saas)
     
     print("Managed applications: " + str(cpt_managed))
     print("SaaS applications: " + str(cpt_saas))
